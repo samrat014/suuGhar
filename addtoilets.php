@@ -7,17 +7,16 @@ if(isset($_POST['submit'])){
     $lat =  $_POST['lat'];
     $lng =  $_POST['lng'];
     $description =  $_POST['description'];
-    $picture =  $_POST['picture'];
+    // $picture =  $_POST['picture'];
     
-echo   $location ; echo $lat ;echo $lng ; echo $description; echo $picture;
+// echo   $location ; echo $lat ;echo $lng ; echo $description; echo $picture;
 
-        $sql= "INSERT INTO location (location name, lat, lng, description, picture) values ('$location','$lat','$lng','$description','$picture')";
+        $sqll= "INSERT INTO location VALUES ($location,$lat,$lng,$description)";
         
-        if (mysqli_query($conn, $sql)) {
-            echo "New record created successfully";
-          } else {
-            echo "Error: " . $sql . "<br>" . mysqli_error($conn);
-          }
+        $result = mysqli_query($conn, $sqll);
+        // if (mysqli_query($conn, $sql)) {
+        //     echo "New record created successfully";
+        //   }
 }
 ?>
 <body>
