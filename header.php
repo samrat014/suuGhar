@@ -11,9 +11,18 @@
 <body>
 <div class="header">
         <img src="logo.png" alt="SuuGhar" width="50" height="50">
-        <a href="#" >Find a toilet near me</a>
+        <a href="showtoilets.php" >Find a toilet near me</a>
+
         <a href="forms\loginform.php"> Login </a>
+
+        <?php
+        // if logged in display this test 
+          if(){
+
+              echo "<a href="forms\logout.php"> logout </a> ";
+            }
+        ?>
         <input type="search" placeholder="search" name="search"/>
     </div>
   
-</div>
+</div> 

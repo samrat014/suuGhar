@@ -67,3 +67,71 @@ body {
     background-color: #f1f1f1;
     text-align: center;
   }
+
+
+/* // */
+html, body,#map{
+  width:100%;
+    height:100%;
+    margin:0;
+    padding:0;
+}
+
+body {
+    font: 1em/1.5 BlinkMacSystemFont,-apple-system,"Segoe UI","Roboto","Oxygen","Ubuntu","Cantarell","Fira Sans","Droid Sans","Helvetica Neue","Helvetica","Arial",sans-serif;
+    color: #222;
+    font-weight: 400;
+}
+
+#map {
+    position:absolute;
+    z-index:1;
+    top:0; bottom:0;
+}
+.ol-control button { 
+    background-color: rgba(40, 40, 40, 0.8) !important;
+}
+.ol-control button:hover { 
+    background-color: rgba(40, 40, 40, 1) !important;
+}
+
+.ol_input_geocoder{
+  position:fixed;
+  top:50%;
+  left:2px;
+  z-index:20;
+}
+
+.ol-geocoder{
+  position:fixed !important;
+  top:10px !important;
+  left:35% !important;
+  width:100%;
+}
+
+.gcd-gl-control{
+  width:100% !important;
+  background:none !important;
+}
+
+.gcd-gl-btn{
+  display:none !important;
+}
+
+.ol-geocoder .gcd-gl-input{
+  left:0 !important;
+}
+
+ul.gcd-gl-result{
+  left:0 !important;
+}
+
+#marker {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background:url(https://cdn1.iconfinder.com/data/icons/Map-Markers-Icons-Demo-PNG/256/Map-Marker-Marker-Outside-Azure.png) no-repeat top center;
+  background-size:100%;
+  opacity: 1;
+  cursor: move;
+}

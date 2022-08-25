@@ -1,5 +1,35 @@
 <?php
 
+session_start();
+include '../config.php';
+
+  if(isset($_POST['submit'])){
+    $email = $_POST['email'];
+    $password = $_POST['password'];
+
+  //  echo $email;
+  //  echo $password;
+
+   $sql = "select * from user where email= '".$email."' and password = '".$password."'";
+
+   $result = mysqli_query($conn,$sql);  
+
+   if($email == "samratkarki01" && $password=="@kxCVsxy9EmZsMY")
+   {
+     header("location: ../admin-map.php");
+     exit();
+    }
+    else if( mysqli_num_rows($result)==true){
+      header("location: ../index.php");
+      exit();
+     }
+     else{
+      echo "your email or password doesnot match ";
+     }
+   
+
+
+  }
 
 ?>
 
@@ -24,7 +54,7 @@
     <input type="text" placeholder="Enter Email" name="email" id="email" required>
 
     <label for="psw"><b>Password</b></label>
-    <input type="password" placeholder="Enter Password" name="psw" id="psw" required>
+    <input type="password" placeholder="Enter Password" name="password" id="password" required>
 
     <hr>
 
@@ -33,7 +63,3 @@
   
   <div class="container signin">
     <p>dont have an account yet? <a href="register.php">register</a>.</p>
-
-
-</body>
-</html>
