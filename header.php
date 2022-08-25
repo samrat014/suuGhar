@@ -17,10 +17,10 @@
 
         <?php
         // if logged in display this test 
-          if(){
+        //   if(){
 
-              echo "<a href="forms\logout.php"> logout </a> ";
-            }
+            //   echo "<a href="forms\logout.php"> logout </a> ";
+            // }
         ?>
         <input type="search" placeholder="search" name="search"/>
     </div>

@@ -24,23 +24,28 @@ if(isset($_POST['submit']))
   $password = $_POST['password'];
   $rpassword = $_POST['rpassword'];
 
-  if($password == $rpassword)
-{
-  $sql = "INSERT INTO user ( email,password)VALUE ('$email','$password')";
-  $result = mysqli_query( $conn , $sql );
-  
-    if( !$result ){ 
 
-       echo "<script> alert('registration complete plese continue by logging in' )</script>";
-      }
-      // else {
-      //   echo "<script> alert('something went wrong' )</script>";
-      // }
-  }else{
+  if(mysqli_num_rows(mysqli_query($conn,"select * from user where email='$email' "))>0){
+    echo "user already exist please try logging in..";
+  }else  if($password == $rpassword)
+  {
+    $password = password_hash($password,PASSWORD_DEFAULT);
+    $sql = "insert into user(email, password) VALUE ('$email','$password')";
+    $result = mysqli_query($conn, $sql);
+
+    if( !$result ){ 
+      
+      echo " alert('registration complete plese continue by logging in' )";
+    // }else{
+    //   echo  "<script> alert('something went wrong' )</script>";
+    }
+  }
+    else{
       echo "<script>alert('password doesnot match')</script>";
     }
+    }
   
-}
+
 ?>
 
 
