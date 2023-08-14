@@ -14,39 +14,97 @@
                         <form action="{{ route('toiletCodinates.store') }}" method="POST">
                             @csrf
 
+                            {{-- map  --}}
+
+                            <div id="map" style="width: 100%; height: 500px;"></div>
+
+                            <script src="https://cdnjs.cloudflare.com/ajax/libs/openlayers/2.13.1/OpenLayers.js"></script>
+                            <script>
+                                function initMap() {
+
+                                    var zoom = 16;
+
+                                    var lonLat = new OpenLayers.LonLat(85.3206, 27.70169)
+                                        .transform(
+                                            new OpenLayers.Projection("EPSG:4326"), // transform from WGS 1984
+                                            new OpenLayers.Projection("EPSG:900913") // to Spherical Mercator Projection
+                                        );
+
+
+                                    var map = new OpenLayers.Map("map");
+                                    map.addLayer(new OpenLayers.Layer.OSM());
+
+                                    map.setCenter(lonLat, zoom);
+
+                                    var markers = new OpenLayers.Layer.Markers("Markers");
+                                    map.addLayer(markers);
+
+                                    var marker = new OpenLayers.Marker(lonLat);
+
+                                }
+
+                                initMap();
+
+
+
+                                // var getcodinates = marker.events.register("click", marker, function (evt) {
+                                //         var clickedLonLat = marker.lonlat;
+                                //         var lat = clickedLonLat.lat;
+                                //         var lon = clickedLonLat.lon;
+                                //         alert("Latitude: " + lat + "\nLongitude: " + lon);
+                                //     });
+
+                                //     markers.addMarker(marker);
+                            </script>
+
+                            {{-- end map --}}
+
                             <div class="mb-4">
                                 <label class="block font-semibold mb-1" for="name">Name:</label>
-                                <input class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500" type="text" name="name" required>
+                                <input
+                                    class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500"
+                                    type="text" name="name" required>
                             </div>
 
                             <div class="mb-4">
                                 <label class="block font-semibold mb-1" for="address">Address:</label>
-                                <input class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500" type="text" name="address" required>
+                                <input
+                                    class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500"
+                                    type="text" name="address" required>
                             </div>
 
                             <div class="mb-4">
                                 <label class="block font-semibold mb-1" for="latitude">Latitude:</label>
-                                <input class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500" type="text" name="latitude" required>
+                                <input
+                                    class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500"
+                                    type="text" name="latitude" required>
                             </div>
 
                             <div class="mb-4">
                                 <label class="block font-semibold mb-1" for="longitude">Longitude:</label>
-                                <input class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500" type="text" name="longitude" required>
+                                <input
+                                    class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500"
+                                    type="text" name="longitude" required>
                             </div>
 
                             <div class="mb-4">
                                 <label class="block font-semibold mb-1" for="nearest_station">Nearest Station:</label>
-                                <input class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500" type="text" name="nearest_station" required>
+                                <input
+                                    class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500"
+                                    type="text" name="nearest_station" required>
                             </div>
 
                             <div class="mb-4">
                                 <label class="block font-semibold mb-1" for="image_url">Image URL:</label>
-                                <input class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500" type="text" name="image_url" required>
+                                <input type="file">
                             </div>
 
                             <div class="mb-4">
-                                <button class="px-4 py-2 bg-blue-500 text-black rounded-md hover:bg-blue-600 focus:outline-none" type="submit">Add Location</button>
+                                <button
+                                    class="px-4 py-2 bg-blue-500 text-black rounded-md hover:bg-blue-600 focus:outline-none"
+                                    type="submit">Add Location</button>
                             </div>
+
                         </form>
                     </div>
 
