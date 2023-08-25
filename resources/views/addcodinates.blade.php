@@ -3,6 +3,7 @@
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
             {{ __('suuGhar') }}
         </h2>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     </x-slot>
 
     <div class="py-12">
@@ -16,9 +17,9 @@
 
                             {{-- map  --}}
 
-                            <div id="map" style="width: 100%; height: 500px;"></div>
+                            <div id="map" style="width: 100%; height: 500px;" class="my-3"></div>
 
-                            <script src="https://cdnjs.cloudflare.com/ajax/libs/openlayers/2.13.1/OpenLayers.js"></script>
+                            {{-- <script src="https://cdnjs.cloudflare.com/ajax/libs/openlayers/2.13.1/OpenLayers.js"></script>
                             <script>
                                 function initMap() {
 
@@ -40,24 +41,73 @@
                                     map.addLayer(markers);
 
                                     var marker = new OpenLayers.Marker(lonLat);
-
+                                    const check = document.getElementById('map');
+                                    check.addEventListener("click", function(e) {
+                                        console.log("clicked here: ", e)
+                                    })
                                 }
+                                --}}
 
-                                initMap();
+                            {{-- // initMap(); --}}
 
 
 
-                                // var getcodinates = marker.events.register("click", marker, function (evt) {
+                            {{-- // var getcodinates = marker.events.register("click", marker, function (evt) {
                                 //         var clickedLonLat = marker.lonlat;
                                 //         var lat = clickedLonLat.lat;
                                 //         var lon = clickedLonLat.lon;
                                 //         alert("Latitude: " + lat + "\nLongitude: " + lon);
                                 //     });
 
-                                //     markers.addMarker(marker);
-                            </script>
+                                //     markers.addMarker(marker); --}}
+                            {{-- </script> --}}
 
                             {{-- end map --}}
+
+
+
+
+                            {{-- google map --}}
+                            <script>
+                                let map;
+
+                                function initMap() {
+                                    map = new google.maps.Map(document.getElementById("map"), {
+                                        center: {
+                                            lat: 27.690174201403295,
+                                            lng: 85.29114919320999
+                                        },
+                                        zoom: 13,
+
+                                        scrollwheel: true,
+                                    });
+                                    const uluru = {
+                                        lat: 27.690174201403295,
+                                        lng: 85.29114919320999
+                                    };
+                                    let marker = new google.maps.Marker({
+                                        position: uluru,
+                                        map: map,
+                                        draggable: true
+                                    });
+                                    google.maps.event.addListener(marker, 'position_changed',
+                                        function() {
+                                            let lat = marker.position.lat()
+                                            let lng = marker.position.lng()
+                                            $('#lat').val(lat)
+                                            $('#lng').val(lng)
+                                        })
+                                    google.maps.event.addListener(map, 'click',
+                                        function(event) {
+                                            pos = event.latLng
+                                            marker.setPosition(pos)
+                                        })
+                                }
+                            </script>
+                            <script async defer src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap" type="text/javascript"></script>
+
+                            {{-- end google map --}}
+
 
                             <div class="mb-4">
                                 <label class="block font-semibold mb-1" for="name">Name:</label>
@@ -75,14 +125,14 @@
 
                             <div class="mb-4">
                                 <label class="block font-semibold mb-1" for="latitude">Latitude:</label>
-                                <input
+                                <input id="lat"
                                     class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500"
                                     type="text" name="latitude" required>
                             </div>
 
                             <div class="mb-4">
                                 <label class="block font-semibold mb-1" for="longitude">Longitude:</label>
-                                <input
+                                <input id="lng"
                                     class="w-full px-4 py-2 border rounded-md focus:outline-none focus:border-blue-500"
                                     type="text" name="longitude" required>
                             </div>
