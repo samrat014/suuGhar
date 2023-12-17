@@ -16,7 +16,7 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('auth/login');
 });
 
 // Route::get('/dashboard', function () {
@@ -33,8 +33,9 @@ Route::middleware('auth')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::get('/addmap', [ToiletCodinatesController::class, 'index'])->name('toiletCodinates.store');
 
-
     Route::post('/addmap', [ToiletCodinatesController::class, 'store'])->name('toiletCodinates.store');
+
+    Route::get('/neartoilet', [ToiletCodinatesController::class, 'neartoilet'])->name('neartoilet');
 
 });
 Route::get('/dashboard', [ToiletCodinatesController::class, 'show'])->name('dashboard');

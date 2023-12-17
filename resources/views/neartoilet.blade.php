@@ -61,50 +61,48 @@
                             {{-- end openstreatmaps --}}
 
         {{-- start google map --}}
-                        <div id="map" style="width: 100%; height: 500px; " class="my-3"></div>
+                    <div id="map" style="width: 100%; height: 500px; " class="my-3"></div>
 
-                                <script>
-                                    let map;
+                            <script>
+                                let map;
 
-                                    function initMap() {
-                                        map = new google.maps.Map(document.getElementById("map"), {
-                                            center: {
-                                                lat: 27.70169,
-                                                lng: 85.3206
-                                            },
-                                            zoom: 13,
+                                function initMap() {
+                                    map = new google.maps.Map(document.getElementById("map"), {
+                                        center: {
+                                            lat: 27.70169,
+                                            lng: 85.3206
+                                        },
+                                        zoom: 13,
 
-                                            scrollwheel: true,
-                                        });
+                                        scrollwheel: true,
+                                    });
 
-                                        const uluru = {
-                                            lat: 0,
-                                            lng: 0
-                                        };
+                                    const uluru = {
+                                        lat: 0,
+                                        lng: 0
+                                    };
 
-                                        let marker = new google.maps.Marker({
-                                            position: uluru,
-                                            map: map,
-                                            draggable: true
-                                        });
-                                        google.maps.event.addListener(marker, 'position_changed',
-                                            function() {
-                                                let lat = marker.position.lat()
-                                                let lng = marker.position.lng()
-                                                $('#lat').val(lat)
-                                                $('#lng').val(lng)
-                                            })
-                                        google.maps.event.addListener(map, 'click',
-                                            function(event) {
-                                                pos = event.latLng
-                                                marker.setPosition(pos)
-                                            })
-                                    }
-                                </script>
+                                    let marker = new google.maps.Marker({
+                                        position: uluru,
+                                        map: map,
+                                        draggable: true
+                                    });
+                                    google.maps.event.addListener(marker, 'position_changed',
+                                        function() {
+                                            let lat = marker.position.lat()
+                                            let lng = marker.position.lng()
+                                            $('#lat').val(lat)
+                                            $('#lng').val(lng)
+                                        })
+                                    google.maps.event.addListener(map, 'click',
+                                        function(event) {
+                                            pos = event.latLng
+                                            marker.setPosition(pos)
+                                        })
+                                }
+                            </script>
                             <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDZmutik0rkonFUN9xw0u9V7qPnV6GNP1Q&callback=initMap" type="text/javascript"></script>
-
-{{--                            <script async defer src="https://maps.googleapis.com/maps/api/js?key=&callback=initMap" type="text/javascript"></script>--}}
-                                {{-- end google map --}}
+                            {{-- end google map --}}
 
                         </div>
                     </div>

@@ -17,6 +17,28 @@ class ToiletCodinatesController extends Controller
         return view('addcodinates');
     }
 
+    public function neartoilet()
+    {
+//        if ($lat == null || $lng == null) {
+            $lat = 27.70169;
+            $lng = 85.3206;
+//        }
+
+        $toiletCodinates = ToiletCodinates::
+            where('latitude', $lat)
+            ->where('longitude', $lng)
+            ->select("id", "name", "address", "latitude", "longitude", "nearest_station", "image_url")
+            ->get()
+            ->map(function ($toiletCodinates) {
+                $toiletCodinates->distance = $toiletCodinates->distanceBetween(27.70169, 85.3206);
+                return $toiletCodinates;
+            })
+            ->sortBy('distance');
+
+        return view('neartoilet')->with('toiletCodinates', $toiletCodinates);
+
+    }
+
     /**
      * Store a newly created resource in storage.
      */
@@ -111,5 +133,38 @@ class ToiletCodinatesController extends Controller
 
             return redirect()->route('dashboard')->with('success', 'Location deleted successfully.');
         }
+    }
+
+
+
+    // helper funciton
+    public function distanceBetween($lat1, $lon1)
+    {
+        $lat2 = $this->latitude;
+        $lon2 = $this->longitude;
+
+        $theta = $lon1 - $lon2;
+        $dist = sin(deg2rad($lat1))
+            * sin(deg2rad($lat2))
+            + cos(deg2rad($lat1))
+            * cos(deg2rad($lat2))
+            * cos(deg2rad($theta));
+
+        $dist = acos($dist);
+        $dist = rad2deg($dist);
+
+        return $dist * 60 * 1.1515;
+    }
+
+    // get current location from device in longitute and latitude
+    public function getUserLocation()
+    {
+        $ip = $_SERVER['REMOTE_ADDR'];
+        $ipdat = @json_decode(file_get_contents("http://www.geoplugin.net/json.gp?ip=" . $ip));
+
+        $latitude = $ipdat->geoplugin_latitude;
+        $longitude = $ipdat->geoplugin_longitude;
+
+        return $latitude . ',' . $longitude;
     }
 }
